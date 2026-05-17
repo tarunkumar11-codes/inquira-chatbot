@@ -29,7 +29,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("http://localhost:5000/upload", formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData);
       setUploaded(true);
       setMessages([{ sender: "bot", text: "Document loaded successfully. Ask me anything about it." }]);
     } catch (error) {
@@ -64,7 +64,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/chat", { question });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/chat`, { question });
       setMessages((prev) => [...prev, { sender: "bot", text: response.data.answer }]);
     } catch (error) {
       setMessages((prev) => [...prev, { sender: "bot", text: "Something went wrong. Please try again." }]);
